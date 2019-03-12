@@ -21,6 +21,20 @@ code {
   background-color: yellow;
 }
 
+.album_container {
+  background-color: aqua;
+  position: absolute;
+  /* max-width: 15rem; */
+  top: 145px;
+  right: 10rem;
+}
+
+.dropdown {
+  background-color: white;
+  width: 15rem;
+  height: 3rem;
+}
+
 .user_box {
   border: grey;
   border: solid;
