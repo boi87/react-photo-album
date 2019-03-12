@@ -56,6 +56,9 @@ class User extends Component {
         </div>
         <div className="album_container">
           <select className="dropdown">
+            <option selected disabled>
+              Albums
+            </option>
             {!albumData} ? <p>...Loading</p> :
             {albumData.map(e => {
               return (
