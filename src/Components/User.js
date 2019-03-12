@@ -4,7 +4,9 @@ import axios from "axios";
 
 class User extends Component {
   state = {
-    users: null
+    users: null,
+    albums: null,
+    active: null
   };
 
   componentDidMount() {
@@ -16,22 +18,32 @@ class User extends Component {
         });
       })
       .catch(err => console.log(err));
+
+    axios
+      .get("https://jsonplaceholder.typicode.com/albums")
+      .then(res => {
+        this.setState({
+          albums: res.data
+        });
+      })
+      .catch(err => console.log(err));
   }
 
   render() {
-    const data = this.state.users;
+    const userData = this.state.users;
+    const albumData = this.state.albums;
     return (
       <div className="main_container">
         <div className="user_container">
           <h1>Users</h1>
-          {!data ? (
+          {!userData ? (
             <p>...Loading</p>
           ) : (
             <ul>
-              {data.map((d, idx) => {
+              {userData.map(d => {
                 return (
                   <div
-                    key={idx}
+                    key={d.id}
                     className="user_box"
                     onclick={this.handleChange}
                   >
@@ -50,6 +62,23 @@ class User extends Component {
             <option value="grapefruit">Grapefruit</option>
             <option value="lime">Lime</option>
           </select>
+          {!albumData ? (
+            <p>...Loading</p>
+          ) : (
+            <ul>
+              {albumData.map(d => {
+                return (
+                  <div
+                    key={d.id}
+                    className="user_box"
+                    onclick={this.handleChange}
+                  >
+                    {d.title}
+                  </div>
+                );
+              })}
+            </ul>
+          )}
         </div>
       </div>
     );
