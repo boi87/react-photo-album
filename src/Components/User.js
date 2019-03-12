@@ -19,15 +19,16 @@ class User extends Component {
   }
 
   render() {
+    const data = this.state.users;
     return (
       <div className="user_container">
         <h1>Users</h1>
-        {!this.state.users ? (
+        {!data ? (
           <p>...Loading</p>
         ) : (
           <ul>
-            {this.state.users[0].map((a, key) => {
-              <li id={key}>{a.name}</li>;
+            {data.map((d, idx) => {
+              return <li key={idx}>{d.name}</li>;
             })}
           </ul>
         )}
