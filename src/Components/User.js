@@ -5,7 +5,7 @@ import axios from "axios";
 class User extends Component {
   state = {
     users: null,
-    albums: null,
+    albums: [],
     active: null
   };
 
@@ -56,29 +56,15 @@ class User extends Component {
         </div>
         <div className="album_container">
           <select className="dropdown">
-            <option selected disabled>
-              Albums
-            </option>
-            <option value="grapefruit">Grapefruit</option>
-            <option value="lime">Lime</option>
+            {!albumData} ? <p>...Loading</p> :
+            {albumData.map(e => {
+              return (
+                <option key={e.id} className="album_box">
+                  {e.title}
+                </option>
+              );
+            })}
           </select>
-          {!albumData ? (
-            <p>...Loading</p>
-          ) : (
-            <ul>
-              {albumData.map(d => {
-                return (
-                  <div
-                    key={d.id}
-                    className="user_box"
-                    onclick={this.handleChange}
-                  >
-                    {d.title}
-                  </div>
-                );
-              })}
-            </ul>
-          )}
         </div>
       </div>
     );
