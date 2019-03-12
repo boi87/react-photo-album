@@ -16,3 +16,31 @@ code {
 .container {
   background-color: red;
 }
+
+.user_container {
+  background-color: yellow;
+}
+
+.album_container {
+  background-color: aqua;
+  position: absolute;
+  /* max-width: 15rem; */
+  top: 145px;
+  right: 16rem;
+}
+
+.dropdown {
+  background-color: white;
+  width: 15rem;
+  height: 3rem;
+}
+
+.user_box {
+  border: grey;
+  border: solid;
+  line-height: 2rem;
+  padding: 2px;
+  margin-top: 10px;
+  max-width: 13rem;
+  text-align: center;
+}
