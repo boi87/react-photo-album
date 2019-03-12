@@ -20,3 +20,13 @@ code {
 .user_container {
   background-color: yellow;
 }
+
+.user_box {
+  border: grey;
+  border: solid;
+  line-height: 2rem;
+  padding: 2px;
+  margin-top: 10px;
+  max-width: 13rem;
+  text-align: center;
+}

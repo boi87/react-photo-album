@@ -28,7 +28,11 @@ class User extends Component {
         ) : (
           <ul>
             {data.map((d, idx) => {
-              return <li key={idx}>{d.name}</li>;
+              return (
+                <div key={idx} className="user_box">
+                  {d.name}
+                </div>
+              );
             })}
           </ul>
         )}
