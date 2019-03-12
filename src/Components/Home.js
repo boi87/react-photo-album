@@ -6,7 +6,6 @@ const Home = () => {
   return (
     <div className="container">
       <h1>Photo Album!!!</h1>
-      <h1> Merda </h1>
       <User />
     </div>
   );
