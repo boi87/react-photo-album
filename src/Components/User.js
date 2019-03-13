@@ -4,12 +4,7 @@ import axios from "axios";
 
 class User extends Component {
   state = {
-    users: null,
-    albums: [],
-    photos: [],
-    bgColor: "white",
-    selectedUserId: "",
-    selectedAlbumId: "Albums"
+    users: []
   };
 
   componentDidMount() {
@@ -23,20 +18,9 @@ class User extends Component {
       .catch(err => console.log(err));
   }
 
-  handleClick = a => {
-    this.props.onUserSelected(a);
-    // if (a.id === id)
-    this.setState({
-      selectedUserId: a
-      // bgColor: "lightgreen"
-    });
+  handleClick = userId => {
+    this.props.onUserSelected(userId);
   };
-
-  // change = event => {
-  //   this.setState({
-  //     selectedAlbumId: event.target.value
-  //   });
-  // };
 
   render() {
     const userData = this.state.users;
@@ -57,7 +41,9 @@ class User extends Component {
                     // onChange={this.handleClick}
                     style={{
                       backgroundColor:
-                        this.props.selectedUserId === d.id ? "green" : "white"
+                        this.props.selectedUserId === d.id
+                          ? "lightgreen"
+                          : "white"
                     }}
                   >
                     {d.name}

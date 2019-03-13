@@ -21,16 +21,20 @@ class Home extends Component {
   render() {
     return (
       <div className="container">
-        <h1>Photo Album</h1>
-        <User
-          onUserSelected={this.onUserSelected}
-          selectedUserId={this.state.selectedUserId}
-        />
-        <Album
-          selectedUserId={this.state.selectedUserId}
-          onAlbumSelected={this.onAlbumSelected}
-        />
-        <Photo selectedAlbumId={this.state.selectedAlbumId} />
+        <h1 className="title">Photo Album</h1>
+        <div className="sdn_container">
+          <User
+            onUserSelected={this.onUserSelected}
+            selectedUserId={this.state.selectedUserId}
+          />
+          <div className="album_photo_container">
+            <Album
+              selectedUserId={this.state.selectedUserId}
+              onAlbumSelected={this.onAlbumSelected}
+            />
+            <Photo selectedAlbumId={this.state.selectedAlbumId} />
+          </div>
+        </div>
       </div>
     );
   }

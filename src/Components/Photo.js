@@ -26,14 +26,14 @@ class Photo extends Component {
     const photoData = this.state.photos;
 
     return (
-      <div className="photo_container">
+      <div>
         {!photoData ? (
           <p>...Loading</p>
         ) : (
-          <div>
-            {photoData.map(u => {
+          <div className="photobox_container">
+            {photoData.map(photoItem => {
               // if (parseInt(this.state.selectedAlbumId) === parseInt(u.albumId))
-              return <img src={u.thumbnailUrl} className="photo_box" />;
+              return <img src={photoItem.thumbnailUrl} className="photo_box" />;
             })}
           </div>
         )}
