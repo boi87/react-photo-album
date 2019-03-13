@@ -10,6 +10,7 @@ class Home extends Component {
     selectedAlbumId: false
   };
 
+  // gets the userId
   onUserSelected = userId => {
     this.setState({ selectedUserId: userId });
   };
@@ -24,8 +25,8 @@ class Home extends Component {
         <h1 className="title">Photo Album</h1>
         <div className="sdn_container">
           <User
-            onUserSelected={this.onUserSelected}
-            selectedUserId={this.state.selectedUserId}
+            onUserSelected={this.onUserSelected} // this props will update the state of selectedUserId in Home.js
+            selectedUserId={this.state.selectedUserId} // I need this as props to be able to change the colour of the active user
           />
           <div className="album_photo_container">
             <Album

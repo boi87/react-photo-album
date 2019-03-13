@@ -27,26 +27,25 @@ class User extends Component {
     return (
       <div className="main_container">
         <div className="user_container">
-          <h1>Users</h1>
+          <h1 className="title">Users</h1>
           {!userData ? (
             <p>...Loading</p>
           ) : (
             <ul>
-              {userData.map(d => {
+              {userData.map(userItem => {
                 return (
                   <div
-                    key={d.id}
+                    key={userItem.id}
                     className="user_box"
-                    onClick={() => this.handleClick(d.id)}
-                    // onChange={this.handleClick}
+                    onClick={() => this.handleClick(userItem.id)} // call handleClick func with the id as parameter
                     style={{
                       backgroundColor:
-                        this.props.selectedUserId === d.id
+                        this.props.selectedUserId === userItem.id
                           ? "lightgreen"
                           : "white"
                     }}
                   >
-                    {d.name}
+                    {userItem.name}
                   </div>
                 );
               })}

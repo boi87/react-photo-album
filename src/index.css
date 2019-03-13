@@ -14,8 +14,10 @@ code {
 }
 
 .title {
-  background-color: red;
   text-align: center;
+  font-family: Calibri;
+  color: rgb(255, 255, 255);
+  background-color: rgb(19, 211, 19);
 }
 .sdn_container {
   display: flex;
@@ -31,30 +33,18 @@ code {
 }
 
 .user_container {
-  background-color: yellow;
+  background-color: rgb(240, 238, 238);
   width: 19rem;
   height: 37rem;
   text-align: center;
 }
 
-.album_container {
-  /* background-color: green; */
-  /* position: fixed; */
-  /* bottom: 34rem; */
-  /* right: 30rem; */
-  /* width: 35%;
-  height: 6rem;
-  display: flex; */
-}
-
 .dropdown {
-  /* position: relative; */
   background-color: white;
   width: 30rem;
   height: 3rem;
-  align-self: center;
   margin: 0 auto;
-  text-align: center;
+  text-align: right;
   font-family: Calibri;
   font-size: 18px;
 }
@@ -70,11 +60,9 @@ code {
 }
 
 .photobox_container {
-  background-color: aqua;
   display: flex-wrap;
   margin: 30px;
   padding: 15px;
-  /* position: absolute; */
   width: 120%;
   height: 30rem;
   left: 20rem;
