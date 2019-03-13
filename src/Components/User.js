@@ -6,7 +6,9 @@ class User extends Component {
   state = {
     users: null,
     albums: [],
-    active: null
+
+    bgColor: "white",
+    selectedUserId: ""
   };
 
   componentDidMount() {
@@ -29,6 +31,14 @@ class User extends Component {
       .catch(err => console.log(err));
   }
 
+  handleClick = (a, id) => {
+    // if (a.id === id)
+    this.setState({
+      selectedUserId: a
+      // bgColor: "lightgreen"
+    });
+  };
+
   render() {
     const userData = this.state.users;
     const albumData = this.state.albums;
@@ -45,7 +55,10 @@ class User extends Component {
                   <div
                     key={d.id}
                     className="user_box"
-                    onclick={this.handleChange}
+                    // value
+                    onClick={() => this.handleClick(d.id)}
+                    // onChange={this.handleClick}
+                    style={{ backgroundColor: this.state.bgColor }}
                   >
                     {d.name}
                   </div>
@@ -61,7 +74,10 @@ class User extends Component {
             </option>
             {!albumData} ? <p>...Loading</p> :
             {albumData.map(e => {
-              if (e.id === userData.id)
+              // {
+              //   userData.id = 1;
+              // }
+              if (e.userId === userData.id)
                 return (
                   <option key={e.id} className="album_box">
                     {e.title}
