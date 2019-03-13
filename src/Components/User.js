@@ -9,8 +9,7 @@ class User extends Component {
     photos: [],
     bgColor: "white",
     selectedUserId: "",
-    selectedAlbumId: 0,
-    value: "Albums"
+    selectedAlbumId: "Albums"
   };
 
   componentDidMount() {
@@ -52,7 +51,7 @@ class User extends Component {
 
   change = event => {
     this.setState({
-      value: event.target.value
+      selectedAlbumId: event.target.value
     });
   };
 
@@ -91,9 +90,9 @@ class User extends Component {
             onChange={this.change}
             value={this.state.value}
           >
-            {/* <option selected disabled>
+            <option selected disabled>
               Albums
-            </option> */}
+            </option>
             {!albumData} ? <p>...Loading</p> :
             {albumData.map(e => {
               // {
