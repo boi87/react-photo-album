@@ -19,11 +19,11 @@ class User extends Component {
   }
 
   handleClick = userId => {
-    this.props.onUserSelected(userId);
+    this.props.onUserSelected(userId); // 2) handleClick() passes the userId to onUserSelected, which has been created in Home and will uopdate the state
   };
 
   render() {
-    const userData = this.state.users;
+    const userData = this.state.users; // makes it easier to access the state
     return (
       <div className="main_container">
         <div className="user_container">
@@ -35,12 +35,14 @@ class User extends Component {
               {userData.map(userItem => {
                 return (
                   <div
-                    key={userItem.id}
+                    key={userItem.id} // you can't render two things with the same id. either pass a key to map or do like this
                     className="user_box"
-                    onClick={() => this.handleClick(userItem.id)} // call handleClick func with the id as parameter
+                    // 1) call handleClick func with the user id as parameter
+                    onClick={() => this.handleClick(userItem.id)}
+                    // check if the selectedUserId I passed from Home as props is the same as the userId and changes its colour
                     style={{
                       backgroundColor:
-                        this.props.selectedUserId === userItem.id
+                        this.props.selectedUserId === userItem.id // check if the selectedUserId is the same and the one we are looping in
                           ? "lightgreen"
                           : "white"
                     }}

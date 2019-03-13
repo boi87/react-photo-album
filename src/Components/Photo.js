@@ -4,12 +4,14 @@ import axios from "axios";
 
 class Photo extends Component {
   state = {
-    photos: []
+    photos: [] // this is the only thing whose state gets updated in this component
   };
 
+  // photos were not loading up until I used componentWillReceiveProps(nextProps). Src: http://busypeoples.github.io/post/react-component-lifecycle/
   componentWillReceiveProps(nextProps) {
     axios
       .get(
+        // using the query in the url it takes less to load up because it doesn't load up all the items
         `https://jsonplaceholder.typicode.com/photos?albumId=${
           nextProps.selectedAlbumId
         }`
@@ -23,8 +25,7 @@ class Photo extends Component {
   }
 
   render() {
-    const photoData = this.state.photos;
-
+    const photoData = this.state.photos; // makes it easier to access the state
     return (
       <div>
         {!photoData ? (
