@@ -103,7 +103,7 @@ class User extends Component {
                   <option
                     // key={e.id}
                     value={e.id}
-                    onChange={key => this.change(key)}
+                    // onChange={key => this.change(key)}
                     className="album_box"
                   >
                     {e.title}
@@ -116,21 +116,21 @@ class User extends Component {
           {!photoData ? (
             <p>...Loading</p>
           ) : (
-            <ul>
+            <div>
               {photoData.map(u => {
-                const photoDataId = 1;
-                const photoDataAlbumId = 1;
-                // if (this.state.selectedAlbumId === u.albumId)
-
-                if (photoDataId === u.id && photoDataAlbumId === u.albumId)
+                // const photoDataId = 1;
+                // const photoDataAlbumId = 1;
+                // const imgs = [];
+                // console.log(this.state.selectedAlbumId === u.albumId);
+                if (
+                  parseInt(this.state.selectedAlbumId) === parseInt(u.albumId)
+                )
+                  // imgs.push(u.url);
+                  // if (photoDataId === u.id && photoDataAlbumId === u.albumId)
                   // if (u.albumId === this.state.selectedAlbumId)
-                  return (
-                    <img src={u.url} albumId={u.id} className="photo_box" />
-                    //   UU
-                    // </div>
-                  );
+                  return <img src={u.thumbnailUrl} className="photo_box" />;
               })}
-            </ul>
+            </div>
           )}
         </div>
       </div>
