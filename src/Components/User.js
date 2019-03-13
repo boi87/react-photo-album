@@ -31,7 +31,7 @@ class User extends Component {
       .catch(err => console.log(err));
   }
 
-  handleClick = (a, id) => {
+  handleClick = a => {
     // if (a.id === id)
     this.setState({
       selectedUserId: a
@@ -77,7 +77,7 @@ class User extends Component {
               // {
               //   userData.id = 1;
               // }
-              if (e.userId === userData.id)
+              if (e.userId === this.state.selectedUserId)
                 return (
                   <option key={e.id} className="album_box">
                     {e.title}
