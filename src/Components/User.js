@@ -6,9 +6,10 @@ class User extends Component {
   state = {
     users: null,
     albums: [],
-
+    photos: [],
     bgColor: "white",
-    selectedUserId: ""
+    selectedUserId: "",
+    selectedAlbumId: ""
   };
 
   componentDidMount() {
@@ -29,6 +30,15 @@ class User extends Component {
         });
       })
       .catch(err => console.log(err));
+
+    axios
+      .get("https://jsonplaceholder.typicode.com/photos")
+      .then(res => {
+        this.setState({
+          photos: res.data
+        });
+      })
+      .catch(err => console.log(err));
   }
 
   handleClick = a => {
@@ -42,6 +52,7 @@ class User extends Component {
   render() {
     const userData = this.state.users;
     const albumData = this.state.albums;
+    const photoData = this.state.photos;
     return (
       <div className="main_container">
         <div className="user_container">
@@ -85,6 +96,26 @@ class User extends Component {
                 );
             })}
           </select>
+        </div>
+        <div className="photo_container">
+          {!photoData ? (
+            <p>...Loading</p>
+          ) : (
+            <ul>
+              {photoData.map(u => {
+                const photoDataId = 1;
+                const photoDataAlbumId = 1;
+
+                if (photoDataId === u.id && photoDataAlbumId === u.albumId)
+                  // if (u.albumId === this.state.selectedAlbumId)
+                  return (
+                    <img src={u.url} albumId={u.id} className="photo_box" />
+                    //   UU
+                    // </div>
+                  );
+              })}
+            </ul>
+          )}
         </div>
       </div>
     );
