@@ -4,58 +4,57 @@ import axios from "axios";
 
 class Album extends Component {
   state = {
-    albums: [],
-    active: null
+    albums: [] // this is the only thing whose state gets updated in this component
   };
 
-  componentDidMount() {
-    axios
-      .get("https://jsonplaceholder.typicode.com/albums")
-      .then(res => {
-        this.setState({
-          albums: res.data
-        });
-      })
-      .catch(err => console.log(err));
+  // albums' dropdown were not loading up until I used componentWillReceiveProps(nextProps). Src: http://busypeoples.github.io/post/react-component-lifecycle/
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.selectedUserId)
+      // manually force update props
+      axios
+        .get(
+          // using the query in the url it takes less to load up because it doesn't load up all the items
+          `https://jsonplaceholder.typicode.com/albums?userId=${
+            nextProps.selectedUserId
+          }`
+        )
+        .then(res => {
+          this.setState({
+            albums: res.data
+          });
+        })
+        .catch(err => console.log(err));
   }
 
+  change = event => {
+    // 2) the change() function takes an event (the 'value' option below) and passes is to the func onAlbumSelected which comes from Home
+    this.props.onAlbumSelected(event.target.value);
+  };
+
   render() {
-    const albumData = this.state.albums;
+    const albumData = this.state.albums; // makes it easier to access the state
     return (
       <div className="album_container">
-        <select className="dropdown">
-          {console.log(albumData)}
+        <select
+          className="dropdown"
+          // 1) call change func with the current option (value) as parameter
+          onChange={this.change}
+          // line 41 is no longer needed, because I guess value is accessed on line 29
+          // value={this.state.value}
+        >
+          <option selected disabled>
+            Albums
+          </option>
           {!albumData} ? <p>...Loading</p> :
-          {albumData.map(e => {
+          {albumData.map(albumItem => {
             return (
-              <option key={e.id} className="album_box">
-                {e.title}
+              <option value={albumItem.id} className="album_box">
+                {albumItem.title}
               </option>
             );
           })}
         </select>
       </div>
-      //   <div className="user_container">
-      //     <h1>Users</h1>
-
-      //     {!albumData ? (
-      //       <p>...Loading</p>
-      //     ) : (
-      //       <ul>
-      //         {albumData.map(d => {
-      //           return (
-      //             <div
-      //               key={d.id}
-      //               className="user_box"
-      //               onclick={this.handleChange}
-      //             >
-      //               {d.title}
-      //             </div>
-      //           );
-      //         })}
-      //       </ul>
-      //     )}
-      //   </div>
     );
   }
 }

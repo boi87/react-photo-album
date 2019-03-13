@@ -13,26 +13,40 @@ code {
     monospace;
 }
 
-.container {
-  background-color: red;
+.title {
+  text-align: center;
+  font-family: Calibri;
+  color: rgb(255, 255, 255);
+  background-color: rgb(19, 211, 19);
+}
+.sdn_container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.album_photo_container {
+  display: flex;
+  flex-direction: column;
+  /* background-color: pink; */
+  width: 60%;
+  height: 30rem;
+  margin: 25px;
 }
 
 .user_container {
-  background-color: yellow;
-}
-
-.album_container {
-  background-color: aqua;
-  position: absolute;
-  /* max-width: 15rem; */
-  top: 145px;
-  right: 16rem;
+  background-color: rgb(240, 238, 238);
+  width: 19rem;
+  height: 37rem;
+  text-align: center;
 }
 
 .dropdown {
   background-color: white;
-  width: 15rem;
+  width: 30rem;
   height: 3rem;
+  margin: 0 auto;
+  text-align: right;
+  font-family: Calibri;
+  font-size: 18px;
 }
 
 .user_box {
@@ -45,19 +59,29 @@ code {
   text-align: center;
 }
 
-.photo_container {
-  display: flex;
-  /* justify-content: wrap; */
-  background-color: blue;
-  position: absolute;
-  width: 38rem;
-  height: 25rem;
+.photobox_container {
+  display: flex-wrap;
+  margin: 30px;
+  padding: 15px;
+  width: 120%;
+  height: 30rem;
   left: 20rem;
-  bottom: 5rem;
+  bottom: 1rem;
   right: 16rem;
+  text-align: center;
 }
+
 .photo_box {
-  width: 3rem;
-  height: 3rem;
+  width: 4rem;
+  height: 4rem;
   background-color: white;
+  line-height: 2rem;
+  padding: 5px;
+  margin-top: 10px;
+  flex: 1 1 auto;
+  border: 1px black solid;
+  text-align: center;
+  margin: 5px; /* adds space between photo boxes*/
+  max-width: 13rem;
+  text-align: center;
 }

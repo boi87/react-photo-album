@@ -4,12 +4,7 @@ import axios from "axios";
 
 class User extends Component {
   state = {
-    users: null,
-    albums: [],
-    photos: [],
-    bgColor: "white",
-    selectedUserId: "",
-    selectedAlbumId: "Albums"
+    users: []
   };
 
   componentDidMount() {
@@ -21,116 +16,42 @@ class User extends Component {
         });
       })
       .catch(err => console.log(err));
-
-    axios
-      .get("https://jsonplaceholder.typicode.com/albums")
-      .then(res => {
-        this.setState({
-          albums: res.data
-        });
-      })
-      .catch(err => console.log(err));
-
-    axios
-      .get("https://jsonplaceholder.typicode.com/photos")
-      .then(res => {
-        this.setState({
-          photos: res.data
-        });
-      })
-      .catch(err => console.log(err));
   }
 
-  handleClick = a => {
-    // if (a.id === id)
-    this.setState({
-      selectedUserId: a
-      // bgColor: "lightgreen"
-    });
-  };
-
-  change = event => {
-    this.setState({
-      selectedAlbumId: event.target.value
-    });
+  handleClick = userId => {
+    this.props.onUserSelected(userId); // 2) handleClick() passes the userId to onUserSelected, which has been created in Home and will uopdate the state
   };
 
   render() {
-    const userData = this.state.users;
-    const albumData = this.state.albums;
-    const photoData = this.state.photos;
+    const userData = this.state.users; // makes it easier to access the state
     return (
       <div className="main_container">
         <div className="user_container">
-          <h1>Users</h1>
+          <h1 className="title">Users</h1>
           {!userData ? (
             <p>...Loading</p>
           ) : (
             <ul>
-              {userData.map(d => {
+              {userData.map(userItem => {
                 return (
                   <div
-                    key={d.id}
+                    key={userItem.id} // you can't render two things with the same id. either pass a key to map or do like this
                     className="user_box"
-                    // value
-                    onClick={() => this.handleClick(d.id)}
-                    // onChange={this.handleClick}
-                    style={{ backgroundColor: this.state.bgColor }}
+                    // 1) call handleClick func with the user id as parameter
+                    onClick={() => this.handleClick(userItem.id)}
+                    // check if the selectedUserId I passed from Home as props is the same as the userId and changes its colour
+                    style={{
+                      backgroundColor:
+                        this.props.selectedUserId === userItem.id // check if the selectedUserId is the same and the one we are looping in
+                          ? "lightgreen"
+                          : "white"
+                    }}
                   >
-                    {d.name}
+                    {userItem.name}
                   </div>
                 );
               })}
             </ul>
-          )}
-        </div>
-        <div className="album_container">
-          <select
-            className="dropdown"
-            onChange={this.change}
-            value={this.state.value}
-          >
-            <option selected disabled>
-              Albums
-            </option>
-            {!albumData} ? <p>...Loading</p> :
-            {albumData.map(e => {
-              // {
-              //   userData.id = 1;
-              // }
-              if (e.userId === this.state.selectedUserId)
-                return (
-                  <option
-                    // key={e.id}
-                    value={e.id}
-                    // onChange={key => this.change(key)}
-                    className="album_box"
-                  >
-                    {e.title}
-                  </option>
-                );
-            })}
-          </select>
-        </div>
-        <div className="photo_container">
-          {!photoData ? (
-            <p>...Loading</p>
-          ) : (
-            <div>
-              {photoData.map(u => {
-                // const photoDataId = 1;
-                // const photoDataAlbumId = 1;
-                // const imgs = [];
-                // console.log(this.state.selectedAlbumId === u.albumId);
-                if (
-                  parseInt(this.state.selectedAlbumId) === parseInt(u.albumId)
-                )
-                  // imgs.push(u.url);
-                  // if (photoDataId === u.id && photoDataAlbumId === u.albumId)
-                  // if (u.albumId === this.state.selectedAlbumId)
-                  return <img src={u.thumbnailUrl} className="photo_box" />;
-              })}
-            </div>
           )}
         </div>
       </div>
