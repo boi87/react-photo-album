@@ -21,27 +21,10 @@ class User extends Component {
         });
       })
       .catch(err => console.log(err));
-
-    axios
-      .get("https://jsonplaceholder.typicode.com/albums")
-      .then(res => {
-        this.setState({
-          albums: res.data
-        });
-      })
-      .catch(err => console.log(err));
-
-    axios
-      .get("https://jsonplaceholder.typicode.com/photos")
-      .then(res => {
-        this.setState({
-          photos: res.data
-        });
-      })
-      .catch(err => console.log(err));
   }
 
   handleClick = a => {
+    this.props.onUserSelected(a);
     // if (a.id === id)
     this.setState({
       selectedUserId: a
@@ -49,16 +32,14 @@ class User extends Component {
     });
   };
 
-  change = event => {
-    this.setState({
-      selectedAlbumId: event.target.value
-    });
-  };
+  // change = event => {
+  //   this.setState({
+  //     selectedAlbumId: event.target.value
+  //   });
+  // };
 
   render() {
     const userData = this.state.users;
-    const albumData = this.state.albums;
-    const photoData = this.state.photos;
     return (
       <div className="main_container">
         <div className="user_container">
@@ -72,65 +53,18 @@ class User extends Component {
                   <div
                     key={d.id}
                     className="user_box"
-                    // value
                     onClick={() => this.handleClick(d.id)}
                     // onChange={this.handleClick}
-                    style={{ backgroundColor: this.state.bgColor }}
+                    style={{
+                      backgroundColor:
+                        this.props.selectedUserId === d.id ? "green" : "white"
+                    }}
                   >
                     {d.name}
                   </div>
                 );
               })}
             </ul>
-          )}
-        </div>
-        <div className="album_container">
-          <select
-            className="dropdown"
-            onChange={this.change}
-            value={this.state.value}
-          >
-            <option selected disabled>
-              Albums
-            </option>
-            {!albumData} ? <p>...Loading</p> :
-            {albumData.map(e => {
-              // {
-              //   userData.id = 1;
-              // }
-              if (e.userId === this.state.selectedUserId)
-                return (
-                  <option
-                    // key={e.id}
-                    value={e.id}
-                    // onChange={key => this.change(key)}
-                    className="album_box"
-                  >
-                    {e.title}
-                  </option>
-                );
-            })}
-          </select>
-        </div>
-        <div className="photo_container">
-          {!photoData ? (
-            <p>...Loading</p>
-          ) : (
-            <div>
-              {photoData.map(u => {
-                // const photoDataId = 1;
-                // const photoDataAlbumId = 1;
-                // const imgs = [];
-                // console.log(this.state.selectedAlbumId === u.albumId);
-                if (
-                  parseInt(this.state.selectedAlbumId) === parseInt(u.albumId)
-                )
-                  // imgs.push(u.url);
-                  // if (photoDataId === u.id && photoDataAlbumId === u.albumId)
-                  // if (u.albumId === this.state.selectedAlbumId)
-                  return <img src={u.thumbnailUrl} className="photo_box" />;
-              })}
-            </div>
           )}
         </div>
       </div>

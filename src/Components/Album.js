@@ -4,58 +4,58 @@ import axios from "axios";
 
 class Album extends Component {
   state = {
-    albums: [],
-    active: null
+    albums: []
   };
 
-  componentDidMount() {
-    axios
-      .get("https://jsonplaceholder.typicode.com/albums")
-      .then(res => {
-        this.setState({
-          albums: res.data
-        });
-      })
-      .catch(err => console.log(err));
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.selectedUserId)
+      // manually force update props
+      axios
+        .get(
+          `https://jsonplaceholder.typicode.com/albums?userId=${
+            nextProps.selectedUserId
+          }` // filtering happens here
+        )
+        .then(res => {
+          this.setState({
+            albums: res.data
+          });
+        })
+        .catch(err => console.log(err));
   }
+
+  change = event => {
+    this.props.onAlbumSelected(event.target.value);
+  };
 
   render() {
     const albumData = this.state.albums;
+
     return (
       <div className="album_container">
-        <select className="dropdown">
-          {console.log(albumData)}
+        <select
+          className="dropdown"
+          onChange={this.change}
+          value={this.state.value}
+        >
+          <option selected disabled>
+            Albums
+          </option>
           {!albumData} ? <p>...Loading</p> :
           {albumData.map(e => {
             return (
-              <option key={e.id} className="album_box">
+              <option
+                // key={e.id}
+                value={e.id}
+                // onChange={key => this.change(key)}
+                className="album_box"
+              >
                 {e.title}
               </option>
             );
           })}
         </select>
       </div>
-      //   <div className="user_container">
-      //     <h1>Users</h1>
-
-      //     {!albumData ? (
-      //       <p>...Loading</p>
-      //     ) : (
-      //       <ul>
-      //         {albumData.map(d => {
-      //           return (
-      //             <div
-      //               key={d.id}
-      //               className="user_box"
-      //               onclick={this.handleChange}
-      //             >
-      //               {d.title}
-      //             </div>
-      //           );
-      //         })}
-      //       </ul>
-      //     )}
-      //   </div>
     );
   }
 }
