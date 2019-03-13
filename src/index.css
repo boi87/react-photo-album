@@ -44,3 +44,20 @@ code {
   max-width: 13rem;
   text-align: center;
 }
+
+.photo_container {
+  display: flex;
+  /* justify-content: wrap; */
+  background-color: blue;
+  position: absolute;
+  width: 38rem;
+  height: 25rem;
+  left: 20rem;
+  bottom: 5rem;
+  right: 16rem;
+}
+.photo_box {
+  width: 3rem;
+  height: 3rem;
+  background-color: white;
+}
