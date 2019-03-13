@@ -9,7 +9,8 @@ class User extends Component {
     photos: [],
     bgColor: "white",
     selectedUserId: "",
-    selectedAlbumId: ""
+    selectedAlbumId: 0,
+    value: "Albums"
   };
 
   componentDidMount() {
@@ -49,6 +50,12 @@ class User extends Component {
     });
   };
 
+  change = event => {
+    this.setState({
+      value: event.target.value
+    });
+  };
+
   render() {
     const userData = this.state.users;
     const albumData = this.state.albums;
@@ -79,10 +86,14 @@ class User extends Component {
           )}
         </div>
         <div className="album_container">
-          <select className="dropdown">
-            <option selected disabled>
+          <select
+            className="dropdown"
+            onChange={this.change}
+            value={this.state.value}
+          >
+            {/* <option selected disabled>
               Albums
-            </option>
+            </option> */}
             {!albumData} ? <p>...Loading</p> :
             {albumData.map(e => {
               // {
@@ -90,7 +101,12 @@ class User extends Component {
               // }
               if (e.userId === this.state.selectedUserId)
                 return (
-                  <option key={e.id} className="album_box">
+                  <option
+                    // key={e.id}
+                    value={e.id}
+                    onChange={key => this.change(key)}
+                    className="album_box"
+                  >
                     {e.title}
                   </option>
                 );
@@ -105,6 +121,7 @@ class User extends Component {
               {photoData.map(u => {
                 const photoDataId = 1;
                 const photoDataAlbumId = 1;
+                // if (this.state.selectedAlbumId === u.albumId)
 
                 if (photoDataId === u.id && photoDataAlbumId === u.albumId)
                   // if (u.albumId === this.state.selectedAlbumId)
