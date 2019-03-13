@@ -61,11 +61,12 @@ class User extends Component {
             </option>
             {!albumData} ? <p>...Loading</p> :
             {albumData.map(e => {
-              return (
-                <option key={e.id} className="album_box">
-                  {e.title}
-                </option>
-              );
+              if (e.id === userData.id)
+                return (
+                  <option key={e.id} className="album_box">
+                    {e.title}
+                  </option>
+                );
             })}
           </select>
         </div>
