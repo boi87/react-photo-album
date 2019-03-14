@@ -11,7 +11,7 @@ class Photo extends Component {
   componentWillReceiveProps(nextProps) {
     axios
       .get(
-        // using the query in the url it takes less to load up because it doesn't load up all the items
+        // using the query in the url it takes less to load up because it doesn't have to load up all the items
         `https://jsonplaceholder.typicode.com/photos?albumId=${
           nextProps.selectedAlbumId
         }`
@@ -33,7 +33,7 @@ class Photo extends Component {
         ) : (
           <div className="photobox_container">
             {photoData.map(photoItem => {
-              // if (parseInt(this.state.selectedAlbumId) === parseInt(u.albumId))
+              // if (parseInt(this.state.selectedAlbumId) === parseInt(u.albumId)) // this condition is no longer needed because I am updating the axios api url
               return <img src={photoItem.thumbnailUrl} className="photo_box" />;
             })}
           </div>
