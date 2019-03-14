@@ -9,11 +9,13 @@ class Album extends Component {
 
   // albums' dropdown were not loading up until I used componentWillReceiveProps(nextProps). Src: http://busypeoples.github.io/post/react-component-lifecycle/
   componentWillReceiveProps(nextProps) {
+    // if (nextProps.selectedUserId === false) this.setState({ albums: [] });
+
     if (nextProps.selectedUserId)
       // manually force update props
       axios
         .get(
-          // using the query in the url it takes less to load up because it doesn't load up all the items
+          // using the query in the url it takes less to load up because it doesn't have to load up all the items
           `https://jsonplaceholder.typicode.com/albums?userId=${
             nextProps.selectedUserId
           }`
@@ -27,7 +29,7 @@ class Album extends Component {
   }
 
   change = event => {
-    // 2) the change() function takes an event (the 'value' option below) and passes is to the func onAlbumSelected which comes from Home
+    // 2) the change() function takes an event (the 'value' of the option) and passes is to the func onAlbumSelected which comes from Home
     this.props.onAlbumSelected(event.target.value);
   };
 
@@ -39,7 +41,7 @@ class Album extends Component {
           className="dropdown"
           // 1) call change func with the current option (value) as parameter
           onChange={this.change}
-          // line 41 is no longer needed, because I guess value is accessed on line 29
+          // line 41 is no longer needed, because I guess value is accessed with the finc change (line 31)
           // value={this.state.value}
         >
           <option selected disabled>
