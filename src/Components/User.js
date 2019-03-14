@@ -46,6 +46,7 @@ class User extends Component {
                     onClick={() => this.handleClick(userItem.id)}
                     // check if the selectedUserId I passed from Home as props is the same as the userId and changes its colour
                     style={{
+                      // style wants an object. backgroundcolor is a convention for react which wouldn't accept "backgroud-color"
                       backgroundColor:
                         this.props.selectedUserId === userItem.id // check if the selectedUserId is the same and the one we are looping in
                           ? "lightgreen"
