@@ -12,11 +12,7 @@ class Home extends Component {
 
   // gets the userId from the component User, to which it's passed as props
   onUserSelected = userId => {
-    if (userId != this.state.selectedUserId) {
-      this.setState({ selectedUserId: userId });
-    } else {
-      this.setState({ selectedUserId: false });
-    }
+    this.setState({ selectedUserId: userId });
   };
 
   onAlbumSelected = albumId => {

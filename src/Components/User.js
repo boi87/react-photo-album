@@ -19,7 +19,12 @@ class User extends Component {
   }
 
   handleClick = userId => {
-    this.props.onUserSelected(userId); // 2) handleClick() passes the userId to onUserSelected, which has been created in Home and will uopdate the state
+    // checks if user is active already, sets the state to false in home and consequently the button becomes white again
+    if (userId === this.props.selectedUserId) {
+      this.props.onUserSelected(false);
+    } else {
+      this.props.onUserSelected(userId);
+    } // 2) handleClick() passes the userId to onUserSelected, which has been created in Home and will uopdate the state
   };
 
   render() {
